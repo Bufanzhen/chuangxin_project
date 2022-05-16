@@ -3,10 +3,10 @@
 #include "sm3.h"
 #include<time.h>
 
-unsigned long* ptrToPlaintext;
-unsigned long* ptrTohashtext;
-int num1 = 10000000;
-
+unsigned long* ptrToPlaintext;//存sm3前的key们
+unsigned long* ptrTohashtext;//存sm3后的hash值
+int num1 = 10000000;//进行几次SM3
+//得到足够数量的hash值们
 int collision()
 {
 	srand((unsigned)time(NULL));
@@ -42,7 +42,7 @@ int collision()
 		//printf("\n");
 	}
 }
-
+//检测上一步得到的hash值们，有没有发生碰撞
 int check(int* a)
 {
 	for (int i = 0; i < num1-1; i++)
@@ -72,6 +72,6 @@ int check(int* a)
 int main()
 {
 	int* a = malloc(8);
-	collision();
-	check(a);
+	collision();//得到足够数量的hash值们
+	check(a);//检测上一步得到的hash值们，有没有发生碰撞
 }

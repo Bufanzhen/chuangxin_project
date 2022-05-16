@@ -1,0 +1,77 @@
+#include <string.h>
+#include <stdio.h>
+#include "sm3.h"
+#include<time.h>
+
+unsigned long* ptrToPlaintext;
+unsigned long* ptrTohashtext;
+int num1 = 10000000;
+
+int collision()
+{
+	srand((unsigned)time(NULL));
+	for (int num = 0; num < num1; num++)
+	{
+		unsigned long* input = malloc(32);
+		*input = rand() % 0xffffffff;
+		*(input + 1) = rand() % 0xffffffff;
+		*(input + 2) = rand() % 0xffffffff;
+		*(input + 3) = rand() % 0xffffffff;
+		int ilen = 32;
+		unsigned char output[32];
+		int i;
+		sm3_context ctx;
+
+		//printf("Message:\n");
+		//for (int i = 0; i < 3; i++)
+		//{
+		//	printf("%s\n", input+i);
+		//}
+
+		sm3(input, ilen, output);
+		memcpy((void*)(ptrToPlaintext),
+			(void*)input, 32);
+		memcpy((void*)(ptrTohashtext),
+				(void*)input, 32);
+		//printf("Hash:\n   ");
+		//for (i = 0; i < 32; i++)
+		//{
+		//	printf("%02x", output[i]);
+		//	if (((i + 1) % 4) == 0) printf(" ");
+		//}
+		//printf("\n");
+	}
+}
+
+int check(int* a)
+{
+	for (int i = 0; i < num1-1; i++)
+	{
+		for (int j = i + 1; j < num1; j++)
+		{
+			if (*(ptrTohashtext + (8 * i)) == *(ptrTohashtext + (8 * j))
+				|| *(ptrTohashtext + (8 * i) + 1) == *(ptrTohashtext + (8 * j) + 1)
+				|| *(ptrTohashtext + (8 * i) + 2) == *(ptrTohashtext + (8 * j) + 2)
+				|| *(ptrTohashtext + (8 * i) + 3) == *(ptrTohashtext + (8 * j) + 3)
+				|| *(ptrTohashtext + (8 * i) + 4) == *(ptrTohashtext + (8 * j) + 4)
+				|| *(ptrTohashtext + (8 * i) + 5) == *(ptrTohashtext + (8 * j) + 5)
+				|| *(ptrTohashtext + (8 * i) + 6) == *(ptrTohashtext + (8 * j) + 6)
+				|| *(ptrTohashtext + (8 * i) + 7) == *(ptrTohashtext + (8 * j) + 7))
+			{
+				*a = i;
+				*(a + 1) = j;
+				return 1;
+			}
+		}
+	}
+	return 0;
+}
+
+
+
+int main()
+{
+	int* a = malloc(8);
+	collision();
+	check(a);
+}

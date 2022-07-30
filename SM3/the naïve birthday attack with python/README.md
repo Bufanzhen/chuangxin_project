@@ -15,7 +15,7 @@
 
 ![图片](https://user-images.githubusercontent.com/71548447/181870162-9b4c5216-2787-4922-bd54-adcc5fa51691.png)
 
-之后进行改进，采用边算边查，如果有碰撞就停止，可以减少内存使用，成功找出了32bit的碰撞。如下图
+之后进行改进，采用边算边查，如果有碰撞就停止，可以减少内存使用，用时71.77s，成功找出了32bit的碰撞。如下图
 
 ![图片](https://user-images.githubusercontent.com/71548447/181870307-cdeaa1a2-1aa9-4d56-ada5-d97f09f5ac7f.png)
 

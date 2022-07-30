@@ -10,5 +10,5 @@
 
 ![图片](https://user-images.githubusercontent.com/71548447/181908047-1d817a2f-dede-4e62-949c-3a28f12ba8a3.png)
 
-根据此页ppt我们知道了此次长度扩展攻击就是，已知一段消息M的哈希H（M）但是不知道M本身，然后得到H（M||extension）的值，其中extension是可以是任意的值。
+根据此页ppt我们知道了此次长度扩展攻击就是，敌手已知一段消息M的哈希H（M）但是不知道M本身，然后得到H（M||extension）的值，其中extension是可以是任意的值。
 具体实现我们显示从gmssl的第三方python库中的sm3.py中提取到了填充函数，然后把已知的一段hash作为iv，将攻击者的扩展消息作为要加密的并输入，即可得到一段伪造后的hash值。

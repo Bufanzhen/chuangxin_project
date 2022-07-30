@@ -3,7 +3,7 @@ import random
 import time
 
 def collision():
-    a=9
+    a=5
     sizeofspace=2**(int(a*4)-1)
     t1=time.time()
     while True:

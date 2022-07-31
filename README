@@ -8,3 +8,6 @@ Project: implement the Rho method of reduced SM3
 Project: implement length extension attack for SM3  
 Project: do your best to optimize SM3 implementation (software)
 Project: impl sm2 with RFC6979
+
+未完成：
+Project: Impl Merkle Tree following RFC6962（只写出树的结构，未完成验证元素存在和未存在）
